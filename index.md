@@ -7,7 +7,7 @@ The problem: UH has a second language requirement, but it is often difficult to 
 
 The solution: LanguagePals will match up students who are fluent in English and need practice in a foreign language with students who are fluent in the foreign language but need practice in English. 
 
-#Goals
+# Goals
 Students can create a profile with the language(s) they want to practice and constraints on when they can get together with another person. A profile can be displayed as a card in a list of results of a search. Perhaps a search result for student who match with your search can look similar to bowfolios' directory page:
 
 ![](images/directory.png)
