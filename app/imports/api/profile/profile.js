@@ -8,7 +8,8 @@ const Profiles = new Mongo.Collection('Profiles');
 
 /** Create a schema to constrain the structure of documents associated with this collection. */
 const ProfileSchema = new SimpleSchema({
-  name: String,
+  firstName: String,
+  lastName: String,
   email: String,
   bio: { type: String, optional: true },
   picture: { type: String, optional: true },
