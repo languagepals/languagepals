@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Image, Dropdown, Grid } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { _ } from 'meteor/underscore';
 
 /** Renders a single Card in the Directory Page. See pages/ListStuff.jsx. */
 class Profile extends React.Component {
@@ -9,7 +10,7 @@ class Profile extends React.Component {
     return (
         <Card centered>
           <Card.Content>
-            <Image floated='right' size='mini' src={this.props.profile.picture} />
+            <Image floated='right' size='small' rounded src={this.props.profile.picture}/>
             <Card.Header>
               {this.props.profile.firstName} {this.props.profile.lastName}
             </Card.Header>
@@ -21,12 +22,18 @@ class Profile extends React.Component {
             <Grid columns='equal'>
               <Grid.Row>
                 <Grid.Column>
-                  <Dropdown placholder='Fluent Languages'
-                            fluid multiple selection options={this.props.profile.fluentLanguages}/>
+                  <Dropdown text='Fluent Languages' floating labeled button icon='world' className='icon'
+                            fluid selection options={_.map(
+                                this.props.profile.fluentLanguages,
+                                language => ({ key: language, text: language }),
+                            )}/>
                 </Grid.Column>
                 <Grid.Column>
-                  <Dropdown placholder='Practice Languages'
-                            fluid multiple selection options={this.props.profile.practiceLanguages}/>
+                  <Dropdown text='Practice Languages' floating labeled button icon='world' className='icon'
+                            fluid selection options={_.map(
+                                this.props.profile.practiceLanguages,
+                                language => ({ key: language, text: language }),
+                            )}/>
                 </Grid.Column>
               </Grid.Row>
             </Grid>
