@@ -10,10 +10,13 @@ class Profile extends React.Component {
     return (
         <Card centered>
           <Card.Content>
-            <Image floated='right' size='small' rounded src={this.props.profile.picture}/>
+            <Image floated='right' size='tiny' rounded src={this.props.profile.picture}/>
             <Card.Header>
               {this.props.profile.firstName} {this.props.profile.lastName}
             </Card.Header>
+            <Card.Meta>
+              e-mail: {this.props.profile.email}
+            </Card.Meta>
             <Card.Description>
               {this.props.profile.bio}
             </Card.Description>

@@ -12,6 +12,7 @@
   ],
 
   "defaultProfiles": [
-    { "firstName": "John", "lastName": "Foo", "email": "john@foo.com", "bio": "john foo default account", "picture": "/images/meteor-logo.png", "fluentLanguages": ["English"], "practiceLanguages": ["Japanese"]}
+    { "firstName": "John", "lastName": "Foo", "email": "john@foo.com", "bio": "john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account", "picture": "/images/meteor-logo.png", "fluentLanguages": ["English"], "practiceLanguages": ["Japanese"]},
+    { "firstName": "Foo", "lastName": "John", "email": "foo@john.com", "bio": "john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account", "picture": "/images/meteor-logo.png", "fluentLanguages": ["Japanese"], "practiceLanguages": ["English"]}
   ]
 }
