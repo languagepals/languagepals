@@ -42,7 +42,7 @@ class Profile extends React.Component {
             </Grid>
           </Card.Content>
           <Card.Content extra>
-            <Link to={`/edit/${this.props.profile._id}`}>Edit</Link>
+            <Link to={`/adminedit/${this.props.profile._id}`}>Edit</Link>
           </Card.Content>
         </Card>
     );

@@ -11,6 +11,7 @@ import Directory from '../pages/Directory';
 import DirectoryAdmin from '../pages/DirectoryAdmin';
 import AddStuff from '../pages/AddStuff';
 import EditStuff from '../pages/EditStuff';
+import EditProfileAdmin from '../pages/EditProfileAdmin';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
@@ -31,6 +32,7 @@ class App extends React.Component {
               <ProtectedRoute path="/add" component={AddStuff}/>
               <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
               <AdminProtectedRoute path="/admin" component={DirectoryAdmin}/>
+              <AdminProtectedRoute path="/adminedit/:_id" component={EditProfileAdmin}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <Route component={NotFound}/>
             </Switch>
