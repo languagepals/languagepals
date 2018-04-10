@@ -15,12 +15,10 @@ class NavBar extends React.Component {
         <Menu.Item as={NavLink} activeClassName="" exact to="/">
           <Header inverted as='h1'>Language Pals</Header>
         </Menu.Item>
-        {this.props.currentUser ? (
-            [<Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Add pals</Menu.Item>,
-              <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list'>Your Pals</Menu.Item>]
-        ) : ''}
         {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-            <Menu.Item as={NavLink} activeClassName="active" exact to="/admin" key='admin'>Find Pals</Menu.Item>
+            <Menu.Item as={NavLink} activeClassName="active" exact to="/admin" key='admin'>List Pals</Menu.Item>
+        ) : this.props.currentUser ? (
+            <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list'>List Pals</Menu.Item>
         ) : ''}
         <Menu.Item position="right">
           {this.props.currentUser === '' ? (
@@ -34,6 +32,9 @@ class NavBar extends React.Component {
             <Dropdown text={this.props.currentUser} pointing="top right" icon={'user'}>
               <Dropdown.Menu>
                 <Dropdown.Item icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>
+                {Roles.userIsInRole(Meteor.userId(), 'admin') ? '' :
+                    (<Dropdown.Item icon="edit" text="Edit" as={NavLink}
+                                    exact to={`/edit/${this.props.currentUser}`}/>)}
               </Dropdown.Menu>
             </Dropdown>
           )}
