@@ -10,8 +10,7 @@ import Landing from '../pages/Landing';
 import Directory from '../pages/Directory';
 import DirectoryAdmin from '../pages/DirectoryAdmin';
 import AddStuff from '../pages/AddStuff';
-import EditStuff from '../pages/EditStuff';
-import EditProfileAdmin from '../pages/EditProfileAdmin';
+import EditProfile from '../pages/EditProfile';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
@@ -30,9 +29,8 @@ class App extends React.Component {
               <Route path="/signup" component={Signup}/>
               <ProtectedRoute path="/list" component={Directory}/>
               <ProtectedRoute path="/add" component={AddStuff}/>
-              <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
+              <ProtectedRoute path="/edit/:_id" component={EditProfile}/>
               <AdminProtectedRoute path="/admin" component={DirectoryAdmin}/>
-              <AdminProtectedRoute path="/adminedit/:_id" component={EditProfileAdmin}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <Route component={NotFound}/>
             </Switch>
@@ -53,7 +51,8 @@ const ProtectedRoute = ({ component: Component, ...rest }) => (
     {...rest}
     render={(props) => {
       const isLogged = Meteor.userId() !== null;
-      return isLogged ?
+      const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
+      return (isLogged || isAdmin) ?
           (<Component {...props} />) :
           (<Redirect to={{ pathname: '/signin', state: { from: props.location } }}/>
       );
