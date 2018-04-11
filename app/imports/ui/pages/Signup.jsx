@@ -3,8 +3,13 @@ import { Link } from 'react-router-dom';
 import { Container, Form, Grid, Header, Message, Segment, Dropdown } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
 import {Profiles, ProfileSchema} from '../../api/profile/profile';
-import { _ } from 'meteor/underscore';
-import languageList from '../../api/profile/languageList';
+import AutoForm from 'uniforms-semantic/AutoForm';
+import TextField from 'uniforms-semantic/TextField';
+import LongTextField from 'uniforms-semantic/LongTextField';
+import SelectField from 'uniforms-semantic/SelectField';
+import SubmitField from 'uniforms-semantic/SubmitField';
+import HiddenField from 'uniforms-semantic/HiddenField';
+import ErrorsField from 'uniforms-semantic/ErrorsField';
 /**
  * Signup component is similar to signin component, but we attempt to create a new user instead.
  */
@@ -12,7 +17,7 @@ export default class Signup extends React.Component {
   /** Initialize state fields. */
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '', error: '' };
+    this.state = { email: '', password: '', error: '', firstName: '', lastName: '', bio: '', picture: '', fluentLanguages: '', practiceLanguages: ''};
     // Ensure that 'this' is bound to this component in these two functions.
     // https://medium.freecodecamp.org/react-binding-patterns-5-approaches-for-handling-this-92c651b5af56
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,20 +31,14 @@ export default class Signup extends React.Component {
 
   /** Handle Signup submission using Meteor's account mechanism. */
   handleSubmit() {
-    const { email, password } = this.state;
-    Accounts.createUser({ email, username: email, password }, (err) => {
+    const { email, password, firstName, lastName, bio, picture, fluentLanguages, practiceLanguages} = this.state;
+    Accounts.createUser({ email, username: email, password, firstName, lastName, bio, picture, fluentLanguages, practiceLanguages}, (err) => {
       if (err) {
         this.setState({ error: err.reason });
       } else {
         // browserHistory.push('/login');
       }
     });
-  }
-
-  submit(data) {
-    const { lastName, firstName, email, bio, picture, fluentLanguages, practiceLanguages } = data;
-    const owner = Meteor.user().username;
-    Profiles.insert({ lastName, firstName, email, bio, picture, fluentLanguages, practiceLanguages }, this.insertCallback);
   }
 
   /** Display the signup form. */
@@ -50,17 +49,9 @@ export default class Signup extends React.Component {
           <Header as="h2" textAlign="center">
             Register your account
           </Header>
-          <Form onSubmit={this.handleSubmit}>
-            <Segment stacked>
-              <Form.Input
-                  label="Email"
-                  icon="envelope"
-                  iconPosition="left"
-                  name="email"
-                  type="email"
-                  placeholder="E-mail address"
-                  onChange={this.handleChange}
-              />
+          <AutoForm schema={ProfileSchema} onSubmit={this.handleSubmit()}>
+            <Segment>
+              <TextField name='email'/>
               <Form.Input
                   label="Password"
                   icon="lock"
@@ -70,44 +61,17 @@ export default class Signup extends React.Component {
                   type="password"
                   onChange={this.handleChange}
               />
-              <Form.Input
-                  label="First Name"
-                  icon="user"
-                  iconPosition="left"
-                  name="firstname"
-                  placeholder="First Name"
-                  onChange={this.handleChange}
-              />
-              <Form.Input
-                  label="Last Name"
-                  icon="user"
-                  iconPosition="left"
-                  name="lastname"
-                  placeholder="Last Name"
-                  onChange={this.handleChange}
-              />
-              <div class="ui form" onChange={this.handleChange}>
-                <div class="field">
-                  <label>Bio</label>
-                  <textarea></textarea>
-                </div>
-              </div>
-              <Form.Input
-                  label="Picture"
-                  icon="user circle"
-                  iconPosition="left"
-                  name="picture"
-                  placeholder="Picture"
-                  type="picture"
-                  onChange={this.handleChange}
-              />
-              <Dropdown text='Fluent Languages' labeled button icon='world' className='icon' fluid selection options={languageList} onChange={this.handleChange}>
-              </Dropdown>
-              <Dropdown text='Practice Languages' labeled button icon='world' className='icon' fluid selection options={languageList} onChange={this.handleChange}>
-              </Dropdown>
-              <Form.Button content="Submit"/>
+              <TextField name='firstName' onChange={this.handleChange}/>
+              <TextField name='lastName' onChange={this.handleChange}/>
+              <LongTextField name='bio' onChange={this.handleChange}/>
+              <TextField name='picture' onChange={this.handleChange}/>
+              <SelectField name='fluentLanguages' onChange={this.handleChange}/>
+              <SelectField name='practiceLanguages' onChange={this.handleChange}/>
+              <SubmitField value='Submit'/>
+              <ErrorsField/>
+              <HiddenField name='email'/>
             </Segment>
-          </Form>
+          </AutoForm>
           <Message>
             Already have an account? Login <Link to="/signin">here</Link>
           </Message>
