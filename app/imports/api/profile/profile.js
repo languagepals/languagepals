@@ -10,7 +10,8 @@ const Profiles = new Mongo.Collection('Profiles');
 const ProfileSchema = new SimpleSchema({
   firstName: String,
   lastName: String,
-  email: String,
+  owner: String,
+  active: Boolean,
   bio: { type: String, optional: true },
   picture: { type: String, optional: true },
   fluentLanguages: {

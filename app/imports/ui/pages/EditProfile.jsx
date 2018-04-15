@@ -41,35 +41,25 @@ class EditProfile extends React.Component {
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   renderPage() {
     return (
-        <Container>
-          <Grid container centered padded>
-            <Grid.Column>
-              <Header as="h2" textAlign="center">Edit Profile</Header>
-              <AutoForm schema={ProfileSchema} onSubmit={this.submit} model={this.props.doc}>
-                <Segment>
-                  <Form.Group widths='equal'>
-                    <TextField name='firstName'/>
-                    <TextField name='lastName'/>
-                  </Form.Group>
-                  <TextField name='picture'/>
-                  <LongTextField name='bio'/>
-                  <Form.Group widths='equal'>
-                    <SelectField name='fluentLanguages'/>
-                    <SelectField name='practiceLanguages' />
-                  </Form.Group>
-                  <SubmitField value='Submit'/>
-                  <ErrorsField/>
-                  <HiddenField name='email'/>
-                </Segment>
-              </AutoForm>
-              <Divider/>
-              <Button as={Link} to={`/deleteprofile/${this.props.doc._id}`} icon labelPosition='left' negative compact>
-                Delete Profile
-                <Icon name='warning sign' />
-              </Button>
-            </Grid.Column>
-          </Grid>
-        </Container>
+        <Grid container centered>
+          <Grid.Column>
+            <Header as="h2" textAlign="center">Edit Profile</Header>
+            <AutoForm schema={ProfileSchema} onSubmit={this.submit} model={this.props.doc}>
+              <Segment>
+                <TextField name='firstName'/>
+                <TextField name='lastName'/>
+                <LongTextField name='bio'/>
+                <TextField name='picture'/>
+                <SelectField name='fluentLanguages'/>
+                <SelectField name='practiceLanguages'/>
+                <SubmitField value='Submit'/>
+                <ErrorsField/>
+                <HiddenField name='owner'/>
+                <HiddenField name='active'/>
+              </Segment>
+            </AutoForm>
+          </Grid.Column>
+        </Grid>
     );
   }
 }
