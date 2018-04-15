@@ -1,7 +1,8 @@
 {
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme" }
+    { "email": "john@foo.com", "password": "changeme" },
+    { "email": "foo@john.com", "password": "changeme" }
   ],
 
   "defaultData": [
@@ -12,7 +13,7 @@
   ],
 
   "defaultProfiles": [
-    { "firstName": "John", "lastName": "Foo", "email": "john@foo.com", "bio": "john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account", "picture": "/images/meteor-logo.png", "fluentLanguages": ["English"], "practiceLanguages": ["Japanese"]},
-    { "firstName": "Foo", "lastName": "John", "email": "foo@john.com", "bio": "john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account", "picture": "/images/meteor-logo.png", "fluentLanguages": ["Japanese"], "practiceLanguages": ["English"]}
+    { "firstName": "John", "lastName": "Foo", "owner": "john@foo.com", "active": true, "bio": "john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account", "picture": "/images/meteor-logo.png", "fluentLanguages": ["English"], "practiceLanguages": ["Japanese"]},
+    { "firstName": "Foo", "lastName": "John", "owner": "foo@john.com", "active": true, "bio": "john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account john foo default account", "picture": "/images/meteor-logo.png", "fluentLanguages": ["Japanese"], "practiceLanguages": ["English"]}
   ]
 }

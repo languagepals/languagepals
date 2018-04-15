@@ -38,7 +38,7 @@ export default withTracker(() => {
   // Get access to Profile documents.
   const subscription = Meteor.subscribe('Profiles');
   return {
-    profiles: Profiles.find({}).fetch(),
+    profiles: Profiles.find({active: true}).fetch(),
     ready: subscription.ready(),
   };
 })(Directory);

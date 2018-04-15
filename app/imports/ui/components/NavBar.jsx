@@ -37,10 +37,15 @@ class NavBar extends React.Component {
                 <Dropdown text={this.props.currentUser} pointing="top right" icon={'user'}>
                   <Dropdown.Menu>
                     <Dropdown.Item icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>
-                    {Roles.userIsInRole(Meteor.userId(), 'admin') ? '' :
-                        (<Dropdown.Item icon="edit" text="Edit" as={NavLink}
-                                        exact to={`/edit/${this.props.profiles.find(element =>
-                            element.email === this.props.currentUser)._id}`}/>)}
+                    {Roles.userIsInRole(Meteor.userId(), 'admin') ? ''
+                        : this.props.profiles.find(element =>
+                            element.owner === this.props.currentUser).active === false ?
+                            (<Dropdown.Item icon="add user" text="Create Profile" as={NavLink}
+                                            exact to={`/createProfile/${this.props.currentUser}`}/>)
+                            :
+                            (<Dropdown.Item icon="edit" text="Edit Profile" as={NavLink}
+                                            exact to={`/edit/${this.props.profiles.find(element =>
+                                element.owner === this.props.currentUser)._id}`}/>)}
                   </Dropdown.Menu>
                 </Dropdown>
             )}
