@@ -48,7 +48,8 @@ class EditProfile extends React.Component {
                 <SelectField name='practiceLanguages'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
-                <HiddenField name='email'/>
+                <HiddenField name='owner'/>
+                <HiddenField name='active'/>
               </Segment>
             </AutoForm>
           </Grid.Column>
