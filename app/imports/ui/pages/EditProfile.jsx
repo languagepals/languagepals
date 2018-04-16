@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Loader, Header, Segment } from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Form, Button, Divider, Icon } from 'semantic-ui-react';
 import { Profiles, ProfileSchema } from '/imports/api/profile/profile';
 import { Bert } from 'meteor/themeteorchef:bert';
 import AutoForm from 'uniforms-semantic/AutoForm';
@@ -12,9 +12,15 @@ import ErrorsField from 'uniforms-semantic/ErrorsField';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 /** Renders the Page for editing a single document. */
 class EditProfile extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.renderPage = this.renderPage.bind(this);
+  }
 
   /** On successful submit, insert the data. */
   submit(data) {
@@ -40,25 +46,35 @@ class EditProfile extends React.Component {
             <Header as="h2" textAlign="center">Edit Profile</Header>
             <AutoForm schema={ProfileSchema} onSubmit={this.submit} model={this.props.doc}>
               <Segment>
-                <TextField name='firstName'/>
-                <TextField name='lastName'/>
-                <LongTextField name='bio'/>
+                <Form.Group widths='equal'>
+                  <TextField name='firstName'/>
+                  <TextField name='lastName'/>
+                </Form.Group>
                 <TextField name='picture'/>
-                <SelectField name='fluentLanguages'/>
-                <SelectField name='practiceLanguages'/>
+                <LongTextField name='bio'/>
+                <Form.Group widths='equal'>
+                  <SelectField name='fluentLanguages'/>
+                  <SelectField name='practiceLanguages'/>
+                </Form.Group>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
                 <HiddenField name='owner'/>
                 <HiddenField name='active'/>
               </Segment>
             </AutoForm>
+            <Divider/>
+            <Button as={Link} to={`/deactivateprofile/${this.props.doc._id}`}
+                    icon labelPosition='left' negative compact>
+              Deactivate Profile
+              <Icon name='warning sign'/>
+            </Button>
           </Grid.Column>
         </Grid>
     );
   }
 }
 
-/** Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use. */
+/** Require the presence of a profile doc in the props object. Uniforms adds 'model' to the props, which we use. */
 EditProfile.propTypes = {
   doc: PropTypes.object,
   model: PropTypes.object,

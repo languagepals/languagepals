@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Grid, Header, Segment, Loader } from 'semantic-ui-react';
+import { Container, Grid, Header, Segment, Form, Loader } from 'semantic-ui-react';
 import { Profiles, ProfileSchema } from '/imports/api/profile/profile';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
@@ -61,12 +61,16 @@ class CreateProfile extends React.Component {
           </Header>
           <AutoForm schema={ProfileSchema} onSubmit={this.submit} model={this.props.doc} placeholder={true}>
             <Segment>
-              <TextField name='firstName'/>
-              <TextField name='lastName'/>
-              <LongTextField name='bio'/>
+              <Form.Group widths='equal'>
+                <TextField name='firstName'/>
+                <TextField name='lastName'/>
+              </Form.Group>
               <TextField name='picture'/>
-              <SelectField name='fluentLanguages'/>
-              <SelectField name='practiceLanguages'/>
+              <LongTextField name='bio'/>
+              <Form.Group widths='equal'>
+                <SelectField name='fluentLanguages'/>
+                <SelectField name='practiceLanguages'/>
+              </Form.Group>
               <SubmitField value='Submit'/>
               <ErrorsField/>
               <HiddenField name='owner'/>
