@@ -10,7 +10,6 @@ import Landing from '../pages/Landing';
 import Directory from '../pages/Directory';
 import DirectoryAdmin from '../pages/DirectoryAdmin';
 import CreateProfile from '../pages/CreateProfile';
-import AddStuff from '../pages/AddStuff';
 import EditProfile from '../pages/EditProfile';
 import DeactivateProfile from '../pages/DeactivateProfile';
 import NotFound from '../pages/NotFound';
@@ -30,7 +29,6 @@ class App extends React.Component {
               <Route path="/signin" component={Signin}/>
               <Route path="/signup" component={Signup}/>
               <ProtectedRoute path="/list" component={Directory}/>
-              <ProtectedRoute path="/add" component={AddStuff}/>
               <ProtectedRoute path="/createprofile/:_id" component={CreateProfile}/>
               <ProtectedRoute path="/deactivateprofile/:_id" component={DeactivateProfile}/>
               <ProtectedRoute path="/edit/:_id" component={EditProfile}/>
