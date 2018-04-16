@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Loader, Header, Segment, Form, Container, Button, Divider, Icon } from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Form, Button, Divider, Icon } from 'semantic-ui-react';
 import { Profiles, ProfileSchema } from '/imports/api/profile/profile';
 import { Bert } from 'meteor/themeteorchef:bert';
 import AutoForm from 'uniforms-semantic/AutoForm';
@@ -46,18 +46,28 @@ class EditProfile extends React.Component {
             <Header as="h2" textAlign="center">Edit Profile</Header>
             <AutoForm schema={ProfileSchema} onSubmit={this.submit} model={this.props.doc}>
               <Segment>
-                <TextField name='firstName'/>
-                <TextField name='lastName'/>
-                <LongTextField name='bio'/>
+                <Form.Group widths='equal'>
+                  <TextField name='firstName'/>
+                  <TextField name='lastName'/>
+                </Form.Group>
                 <TextField name='picture'/>
-                <SelectField name='fluentLanguages'/>
-                <SelectField name='practiceLanguages'/>
+                <LongTextField name='bio'/>
+                <Form.Group widths='equal'>
+                  <SelectField name='fluentLanguages'/>
+                  <SelectField name='practiceLanguages'/>
+                </Form.Group>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
                 <HiddenField name='owner'/>
                 <HiddenField name='active'/>
               </Segment>
             </AutoForm>
+            <Divider/>
+            <Button as={Link} to={`/deactivateprofile/${this.props.doc._id}`}
+                    icon labelPosition='left' negative compact>
+              Deactivate Profile
+              <Icon name='warning sign'/>
+            </Button>
           </Grid.Column>
         </Grid>
     );

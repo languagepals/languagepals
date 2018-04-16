@@ -1,13 +1,13 @@
 import React from 'react';
 import { Profiles } from '/imports/api/profile/profile';
-import { Button, Loader, Container, Icon } from 'semantic-ui-react';
+import { Button, Loader, Container, Icon, Message } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
 
 /** After the user clicks the "Delete" link in the EditProfile Page, log them out and display this page. */
-class DeleteProfile extends React.Component {
+class DeactivateProfile extends React.Component {
 
   constructor(props) {
     super(props);
@@ -16,19 +16,14 @@ class DeleteProfile extends React.Component {
   }
 
   handleClick() {
-    const user_id = Meteor.userId();
-    Meteor.logout();
-    Meteor.loginWithPassword('admin@foo.com', 'changeme', this.deleteCallback);
-    Meteor.users.remove(user_id);
-    Meteor.logout();
-    Profiles.remove(this.props.doc._id, this.deleteCallback);
+    Profiles.update(this.props.doc._id, { $set: { active: false } }, this.deactivateCallback);
   }
 
-  deleteCallback(error) {
+  deactivateCallback(error) {
     if (error) {
-      Bert.alert({ type: 'danger', message: `Delete Profile Failed: ${error.message}` });
+      Bert.alert({ type: 'danger', message: `Deactivate Profile Failed: ${error.message}` });
     } else {
-      Bert.alert({ type: 'success', message: 'Delete Profile Succeeded' });
+      Bert.alert({ type: 'success', message: 'Deactivate Profile Succeeded' });
     }
   }
 
@@ -41,15 +36,19 @@ class DeleteProfile extends React.Component {
     return (
         <Container textAlign='center'>
           <Button negative onClick={this.handleClick} icon labelPosition='left'>
-            Delete Profile
+            Deactivate Profile
             <Icon name='warning sign'/>
           </Button>
+          <Message>
+            <p>Your profile will no longer be visible on the List Pals page.
+              To reactivate your profile you will need to create and submit a new profile</p>
+          </Message>
         </Container>
     );
   }
 }
 
-DeleteProfile.propTypes = {
+DeactivateProfile.propTypes = {
   doc: PropTypes.object,
   ready: PropTypes.bool.isRequired,
 };
@@ -64,4 +63,4 @@ export default withTracker(({ match }) => {
     doc: Profiles.findOne(user),
     ready: subscription.ready(),
   };
-})(DeleteProfile);
+})(DeactivateProfile);
