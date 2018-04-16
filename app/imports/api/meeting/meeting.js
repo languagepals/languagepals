@@ -4,36 +4,34 @@ import { Tracker } from 'meteor/tracker';
 import { languageList } from '../languageList.js';
 
 /** Create a Meteor collection. */
-const Profiles = new Mongo.Collection('Profiles');
+const Meetings = new Mongo.Collection('Meetings');
 
 /** Create a schema to constrain the structure of documents associated with this collection. */
-const ProfileSchema = new SimpleSchema({
-  firstName: String,
-  lastName: String,
+const MeetingSchema = new SimpleSchema({
   owner: String,
-  active: Boolean,
-  bio: { type: String, optional: true },
-  picture: { type: String, optional: true },
-  fluentLanguages: {
+  createdAt: Date,
+  meetingTime: Date,
+  setting: String,
+  minutes: { type: String, optional: true },
+  members: {
     type: Array,
     optional: true,
   },
-  'fluentLanguages.$': {
+  'Members.$': {
     type: String,
-    allowedValues: languageList,
   },
-  practiceLanguages: {
+  Languages: {
     type: Array,
     optional: true,
   },
-  'practiceLanguages.$': {
+  'Languages.$': {
     type: String,
     allowedValues: languageList,
   },
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */
-Profiles.attachSchema(ProfileSchema);
+Meetings.attachSchema(MeetingSchema);
 
 /** Make the collection and schema available to other code. */
-export { Profiles, ProfileSchema };
+export { Meetings, MeetingSchema };
