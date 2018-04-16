@@ -17,7 +17,7 @@ const MeetingSchema = new SimpleSchema({
     type: Array,
     optional: true,
   },
-  'Members.$': {
+  'members.$': {
     type: String,
   },
   Languages: {
