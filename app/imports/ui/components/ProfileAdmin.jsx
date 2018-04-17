@@ -1,7 +1,8 @@
 import React from 'react';
-import { Card, Image, Dropdown, Grid, Button } from 'semantic-ui-react';
+import { Card, Image, Dropdown, Grid, Button, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { withTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
 import { Profiles } from '/imports/api/profile/profile';
 
@@ -22,7 +23,7 @@ class Profile extends React.Component {
   }
   /* When the delete button is clicked, remove the corresponding item from the collection. */
   onClick() {
-    Profiles.remove(this.props.profile._id, this.deleteCallback);
+    Profiles.update(this.props.doc._id, { $set: { active: false } }, this.deleteCallback);
   }
 
   render() {
@@ -64,7 +65,9 @@ class Profile extends React.Component {
             <Link to={`/edit/${this.props.profile._id}`}>Edit</Link>
           </Card.Content>
           <Card.Content extra>
-              <Button basic onClick={this.onClick}>Deactivate</Button>
+              <Button negative onClick={this.onClick} icon labelPosition='left'>Deactivate Profile
+                <Icon name='warning sign'/>
+              </Button>
           </Card.Content>
         </Card>
     );
@@ -73,8 +76,19 @@ class Profile extends React.Component {
 
 /** Require a document to be passed to this component. */
 Profile.propTypes = {
+  doc: PropTypes.object,
   profile: PropTypes.object.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */
-export default withRouter(Profile);
+export default withTracker((match) =>
+{
+  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
+  const user = match.params._id;
+  // Get access to Stuff documents.
+  const subscription = Meteor.subscribe('Profiles');
+  return {
+    doc: Profiles.findOne(user),
+    ready: subscription.ready(),
+  };
+})
