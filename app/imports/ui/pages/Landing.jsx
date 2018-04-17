@@ -8,7 +8,7 @@ class Landing extends React.Component {
         <div className='languagepals-landing-background'>
         <Grid verticalAlign='middle' textAlign='center' container>
 
-          <Grid.Column width={6}>
+          <Grid.Column width={8}>
             <Header as={'h1'} inverted>Language Pals</Header>
             <Header as={'h3'} inverted>
               Learn a new language by finding study partners fluent in the language you want!
