@@ -1,11 +1,30 @@
 import React from 'react';
-import { Card, Image, Dropdown, Grid } from 'semantic-ui-react';
+import { Card, Image, Dropdown, Grid, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import { _ } from 'meteor/underscore';
+import { Profiles } from '/imports/api/profile/profile';
 
 /** Renders a single Card in the Directory Page. See pages/ListStuff.jsx. */
 class Profile extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.onClick = this.onClick.bind(this);
+  }
+
+  deleteCallback(error) {
+    if (error) {
+      Bert.alert({ type: 'danger', message: `Deactivate failed: ${error.message}` });
+    } else {
+      Bert.alert({ type: 'success', message: 'Deactivate succeeded' });
+    }
+  }
+  /* When the delete button is clicked, remove the corresponding item from the collection. */
+  onClick() {
+    Profiles.remove(this.props.profile._id, this.deleteCallback);
+  }
+
   render() {
     return (
         <Card centered>
@@ -43,6 +62,9 @@ class Profile extends React.Component {
           </Card.Content>
           <Card.Content extra>
             <Link to={`/edit/${this.props.profile._id}`}>Edit</Link>
+          </Card.Content>
+          <Card.Content extra>
+              <Button basic onClick={this.onClick}>Deactivate</Button>
           </Card.Content>
         </Card>
     );
