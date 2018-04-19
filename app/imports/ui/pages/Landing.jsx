@@ -6,10 +6,16 @@ class Landing extends React.Component {
   render() {
     return (
         <div className='languagepals-landing-background'>
-        <Grid verticalAlign='middle' textAlign='center' container>
+        <Grid container stackable centered columns={3}>
 
-          <Grid.Column width={8}>
-            <Header as={'h1'} inverted>Language Pals</Header>
+          <Grid.Column textAlign = 'center'>
+            <img src={'/images/world.jpg'} width={'250px'}></img>
+            <Header as={'h1'} inverted>Learn a Language!</Header>
+          </Grid.Column>
+
+          <Grid.Column textAlign = 'center'>
+            <img src={'/images/friends.png'} width={'350px'}></img>
+            <Header as={'h1'} inverted>Make Friends!</Header>
             <Header as={'h3'} inverted>
               Learn a new language by finding study partners fluent in the language you want!
             </Header>
@@ -17,6 +23,11 @@ class Landing extends React.Component {
               Make an account and list the language you're fluent in and the language you would like to learn.
               You can browse our directory of language speakers and contact them to schedule study sessions!
             </Header>
+          </Grid.Column>
+
+          <Grid.Column textAlign = 'center'>
+            <img src={'/images/teach.jpg'} width={'275px'}></img>
+            <Header as={'h1'} inverted>Teach a Language!</Header>
           </Grid.Column>
 
         </Grid>
