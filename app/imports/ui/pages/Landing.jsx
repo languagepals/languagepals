@@ -14,7 +14,8 @@ class Landing extends React.Component {
           </Grid.Column>
 
           <Grid.Column textAlign = 'center'>
-            <img src={'/images/friends.png'} width={'350px'}></img>
+            <h1 className={'h1'}>Language Pals</h1>
+            <img src={'/images/friends.png'} width={'340px'}></img>
             <Header as={'h1'} inverted>Make Friends!</Header>
             <Header as={'h3'} inverted>
               Learn a new language by finding study partners fluent in the language you want!
@@ -26,7 +27,7 @@ class Landing extends React.Component {
           </Grid.Column>
 
           <Grid.Column textAlign = 'center'>
-            <img src={'/images/teach.jpg'} width={'275px'}></img>
+            <img src={'/images/teach.jpg'} width={'300px'}></img>
             <Header as={'h1'} inverted>Teach a Language!</Header>
           </Grid.Column>
 
