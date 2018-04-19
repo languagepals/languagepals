@@ -8,7 +8,7 @@ import { _ } from 'meteor/underscore';
 class Profile extends React.Component {
   render() {
     return (
-        <Card centered>
+        <Card centered raised>
           <Card.Content>
             <Image floated='right' size='tiny' rounded src={this.props.profile.picture}/>
             <Card.Header>
