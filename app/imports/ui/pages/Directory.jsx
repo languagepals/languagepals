@@ -76,7 +76,11 @@ class Directory extends React.Component {
     languageOptions.unshift({ key: 'All', text: 'All' });
     return (
         <div>
-          <Button onClick={this.toggleVisibility}>Search For Pals</Button>
+          <Divider horizontal>
+            <Button positive onClick={this.toggleVisibility}>
+              Search For Pals
+            </Button>
+          </Divider>
           <Sidebar.Pushable as={Segment} padded>
             <Sidebar as={Menu} animation='push' visible={this.state.visible} icon='labeled' vertical inverted>
               <Segment inverted><Header as="h2" textAlign="center" inverted dividing>Search</Header></Segment>

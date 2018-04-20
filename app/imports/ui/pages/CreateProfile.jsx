@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Grid, Header, Segment, Form, Loader } from 'semantic-ui-react';
+import { Grid, Header, Segment, Form, Loader } from 'semantic-ui-react';
 import { Profiles, ProfileSchema } from '/imports/api/profile/profile';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
@@ -37,9 +37,9 @@ class CreateProfile extends React.Component {
 
   /** Handle submission  */
   submit(data) {
-    const { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, _id } = data;
+    const { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, days, _id } = data;
     Profiles.update(
-        _id, { $set: { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, active: true } },
+        _id, { $set: { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, days, active: true } },
         (error) => (error ?
             Bert.alert({ type: 'danger', message: `Profile Activation failed: ${error.message}` }) :
             Bert.alert({ type: 'success', message: 'Profile Activation Succeeded' })),
@@ -53,7 +53,7 @@ class CreateProfile extends React.Component {
 
   /** Display the form. */
   renderPage() {
-    return <Container>
+    return (
       <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
         <Grid.Column>
           <Header as="h2" textAlign="center">
@@ -62,15 +62,16 @@ class CreateProfile extends React.Component {
           <AutoForm schema={ProfileSchema} onSubmit={this.submit} model={this.props.doc} placeholder={true}>
             <Segment>
               <Form.Group widths='equal'>
-                <TextField name='firstName'/>
-                <TextField name='lastName'/>
+                <TextField Label='First Name' name='firstName'/>
+                <TextField Label='Last Name' name='lastName'/>
               </Form.Group>
               <TextField name='picture'/>
-              <LongTextField name='bio'/>
+              <LongTextField Label='Bio' name='bio'/>
               <Form.Group widths='equal'>
-                <SelectField name='fluentLanguages'/>
-                <SelectField name='practiceLanguages'/>
+                <SelectField Label='Fluent Languages' name='fluentLanguages'/>
+                <SelectField Label='Practice Languages' name='practiceLanguages'/>
               </Form.Group>
+              <SelectField label='Days Available For Meetings' name='days'/>
               <SubmitField value='Submit'/>
               <ErrorsField/>
               <HiddenField name='owner'/>
@@ -79,7 +80,7 @@ class CreateProfile extends React.Component {
           </AutoForm>
         </Grid.Column>
       </Grid>
-    </Container>;
+    );
   }
 }
 
