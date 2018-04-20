@@ -47,15 +47,16 @@ class EditProfile extends React.Component {
             <AutoForm schema={ProfileSchema} onSubmit={this.submit} model={this.props.doc}>
               <Segment>
                 <Form.Group widths='equal'>
-                  <TextField name='firstName'/>
-                  <TextField name='lastName'/>
+                  <TextField label='First Name' name='firstName'/>
+                  <TextField label='Last Name' name='lastName'/>
                 </Form.Group>
                 <TextField name='picture'/>
                 <LongTextField name='bio'/>
                 <Form.Group widths='equal'>
-                  <SelectField name='fluentLanguages'/>
-                  <SelectField name='practiceLanguages'/>
+                  <SelectField label='Fluent Languages' name='fluentLanguages'/>
+                  <SelectField label='Practice Languages' name='practiceLanguages'/>
                 </Form.Group>
+                <SelectField label='Days Available For Meetings' name='days'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
                 <HiddenField name='owner'/>
