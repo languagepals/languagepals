@@ -24,9 +24,9 @@ class EditProfile extends React.Component {
 
   /** On successful submit, insert the data. */
   submit(data) {
-    const { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, _id } = data;
+    const { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, days, _id } = data;
     Profiles.update(
-        _id, { $set: { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages } },
+        _id, { $set: { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, days} },
         (error) => (error ?
             Bert.alert({ type: 'danger', message: `Update failed: ${error.message}` }) :
             Bert.alert({ type: 'success', message: 'Update succeeded' })),
