@@ -82,12 +82,13 @@ class Directory extends React.Component {
   /** Render the page once subscriptions have been received. */
   renderPage() {
     const languageOptions = _.map(languageList.languageList, language => ({ key: language, text: language }));
-    const searchResults = this.props.profiles.filter(profile => (
+    const activeProfiles = this.props.profiles.filter(profile => (profile.active === true));
+    const searchResults = activeProfiles.filter(profile => (
         _.intersection(profile.fluentLanguages, this.state.fluentLanguages).length !== 0
         && _.intersection(profile.practiceLanguages, this.state.practiceLanguages).length !== 0));
     languageOptions.unshift({ key: 'All', text: 'All' });
     const currentUserProfile = this.props.profiles.find(profile => (profile.owner === this.props.currentUser));
-    const matches = this.props.profiles.filter(profile => (
+    const matches = activeProfiles.filter(profile => (
         _.intersection(profile.fluentLanguages, currentUserProfile.practiceLanguages).length !== 0
         && _.intersection(profile.practiceLanguages, currentUserProfile.fluentLanguages).length !== 0
     ));
@@ -128,7 +129,7 @@ class Directory extends React.Component {
                   </Divider>
                   {this.state.All === true ? (
                           <Card.Group itemsPerRow={2}>
-                            {this.props.profiles.map((profile, index) => <Profile key={index} profile={profile}/>)}
+                            {activeProfiles.map((profile, index) => <Profile key={index} profile={profile}/>)}
                           </Card.Group>)
                       : this.state.matches === true ? (<Card.Group itemsPerRow={2}>
                             {matches.map((profile, index) => <Profile key={index} profile={profile}/>)}
@@ -158,7 +159,7 @@ export default withTracker(() => {
   const subscription = Meteor.subscribe('Profiles');
   return {
     currentUser: Meteor.user() ? Meteor.user().username : '',
-    profiles: Profiles.find({ active: true }).fetch(),
+    profiles: Profiles.find({}).fetch(),
     ready: subscription.ready(),
   };
 })(Directory);
