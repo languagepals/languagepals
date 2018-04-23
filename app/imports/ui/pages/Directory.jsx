@@ -60,18 +60,18 @@ class Directory extends React.Component {
   }
 
   setMatchesOn() {
-    this.setState({ All: false, matches: true, search: false });
+    this.setState({ All: false, matches: true });
   }
 
   setMatchesOff() {
-    this.setState({ All: true, matches: false, search: false });
+    this.setState({ All: true, matches: false });
   }
 
   /** Update the form controls each time the user interacts with them. */
   submit(data) {
     const { fluentLanguages, practiceLanguages, All } = data;
     this.setState({ fluentLanguages: fluentLanguages, practiceLanguages: practiceLanguages, All: All,
-      matches: true, search: true });
+      matches: false });
   }
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
@@ -95,7 +95,7 @@ class Directory extends React.Component {
     return (
         <div>
           <Segment padded>
-            {this.state.matches === false ? (
+            {this.state.All === true ? (
                 <Button primary fluid onClick={this.setMatchesOn}>Click For Your Matches</Button>)
             : (<Button primary fluid onClick={this.setMatchesOff}>Click To Display All Pals</Button>)}
             <Divider horizontal>OR</Divider>
