@@ -76,11 +76,11 @@ class DirectoryAdmin extends React.Component {
     languageOptions.unshift({ key: 'All', text: 'All' });
     return (
         <div>
-          <Divider horizontal>
-            <Button positive onClick={this.toggleVisibility}>
+          <Segment padded>
+            <Button secondary onClick={this.toggleVisibility} fluid>
               Search For Pals
             </Button>
-          </Divider>
+          </Segment>
           <Sidebar.Pushable as={Segment} padded>
             <Sidebar as={Menu} animation='push' visible={this.state.visible} icon='labeled' vertical inverted>
               <Segment inverted><Header as="h2" textAlign="center" inverted dividing>Search</Header></Segment>

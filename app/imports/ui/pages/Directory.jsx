@@ -101,7 +101,8 @@ class Directory extends React.Component {
             <Divider horizontal>OR</Divider>
             <Button secondary onClick={this.toggleVisibility} fluid>
               Search For Pals
-            </Button></Segment>
+            </Button>
+          </Segment>
           <Sidebar.Pushable as={Segment} padded>
             <Sidebar as={Menu} animation='push' visible={this.state.visible} icon='labeled' vertical inverted>
               <Segment inverted><Header as="h2" textAlign="center" inverted dividing>Search</Header></Segment>
