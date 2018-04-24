@@ -37,9 +37,9 @@ class CreateProfile extends React.Component {
 
   /** Handle submission  */
   submit(data) {
-    const { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, days, _id } = data;
+    const { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, days, meetingOptions, _id } = data;
     Profiles.update(
-        _id, { $set: { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, days, active: true } },
+        _id, { $set: { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, days, meetingOptions, active: true } },
         (error) => (error ?
             Bert.alert({ type: 'danger', message: `Profile Activation failed: ${error.message}` }) :
             Bert.alert({ type: 'success', message: 'Profile Activation Succeeded' })),
@@ -72,6 +72,7 @@ class CreateProfile extends React.Component {
                 <SelectField Label='Practice Languages' name='practiceLanguages'/>
               </Form.Group>
               <SelectField label='Days Available For Meetings' name='days'/>
+              <SelectField label='Meeting Preferences' name='meetingOptions'/>
               <SubmitField value='Submit'/>
               <ErrorsField/>
               <HiddenField name='owner'/>

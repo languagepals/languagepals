@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Image, Dropdown, Grid, Table, Header, Divider } from 'semantic-ui-react';
+import { Card, Image, Dropdown, Grid, Table, Header, Divider, List} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { _ } from 'meteor/underscore';
@@ -79,6 +79,10 @@ class Profile extends React.Component {
                 </Grid.Column>
               </Grid.Row>
             </Grid>
+          </Card.Content>
+          <Card.Content extra>
+            <Divider horizontal>Meeting Preferences</Divider>
+            <h3>{this.props.profile.meetingOptions}</h3>
           </Card.Content>
         </Card>
     );
