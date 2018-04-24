@@ -1,19 +1,18 @@
 import React from 'react';
-import { Contacts, ContactSchema } from '/imports/api/contact/contact';
+import { Meetings, MeetingSchema } from '/imports/api/meeting/meeting';
 import { Grid, Segment, Header } from 'semantic-ui-react';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
-import LongTextField from 'uniforms-semantic/LongTextField';
-import NumField from 'uniforms-semantic/NumField';
-import SelectField from 'uniforms-semantic/SelectField';
+import DateField from 'uniforms-semantic/DateField';
 import SubmitField from 'uniforms-semantic/SubmitField';
+import SelectField from 'uniforms-semantic/SelectField';
 import HiddenField from 'uniforms-semantic/HiddenField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { Meteor } from 'meteor/meteor';
 
 /** Renders the Page for adding a document. */
-class Meeting extends React.Component {
+class AddMeeting extends React.Component {
 
   /** Bind 'this' so that a ref to the Form can be saved in formRef and communicated between render() and submit(). */
   constructor(props) {
@@ -35,9 +34,9 @@ class Meeting extends React.Component {
 
   /** On submit, insert the data. */
   submit(data) {
-    const { firstName, lastName, address, image, description } = data;
+    const { createdAt, meetingTime, setting, Languages } = data;
     const owner = Meteor.user().username;
-    Contacts.insert({ firstName, lastName, address, image, owner, description }, this.insertCallback);
+    Meetings.insert({ createdAt, meetingTime, setting, Languages, owner }, this.insertCallback);
   }
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
@@ -45,14 +44,13 @@ class Meeting extends React.Component {
     return (
         <Grid container centered>
           <Grid.Column>
-            <Header as="h2" textAlign="center">Add Contact</Header>
-            <AutoForm ref={(ref) => { this.formRef = ref; }} schema={ContactSchema} onSubmit={this.submit}>
+            <Header as="h2" textAlign="center">Add Meeting</Header>
+            <AutoForm ref={(ref) => { this.formRef = ref; }} schema={MeetingSchema} onSubmit={this.submit}>
               <Segment>
-                <TextField name='firstName'/>
-                <TextField name='lastName'/>
-                <TextField name='address'/>
-                <TextField name='image'/>
-                <LongTextField name='description'/>
+                <DateField name='createdAt'/>
+                <DateField name='meetingTime'/>
+                <TextField name='setting'/>
+                <SelectField Label='Languages' name='Languages'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
                 <HiddenField name='owner' value='fakeuser@foo.com'/>
@@ -64,4 +62,4 @@ class Meeting extends React.Component {
   }
 }
 
-export default Meeting;
+export default AddMeeting;
