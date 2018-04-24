@@ -17,6 +17,7 @@ import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 import Meeting from '../pages/Meeting';
+import testing from '../pages/testing';
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
   render() {
@@ -35,6 +36,7 @@ class App extends React.Component {
               <AdminProtectedRoute path="/admin" component={DirectoryAdmin}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <ProtectedRoute path="/meeting" component={Meeting}/>
+              <ProtectedRoute path="/testing" component={testing}/>
               <Route component={NotFound}/>
             </Switch>
             <Footer/>

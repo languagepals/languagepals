@@ -1,44 +1,67 @@
 import React from 'react';
+import { Contacts, ContactSchema } from '/imports/api/contact/contact';
+import { Grid, Segment, Header } from 'semantic-ui-react';
+import AutoForm from 'uniforms-semantic/AutoForm';
+import TextField from 'uniforms-semantic/TextField';
+import LongTextField from 'uniforms-semantic/LongTextField';
+import NumField from 'uniforms-semantic/NumField';
+import SelectField from 'uniforms-semantic/SelectField';
+import SubmitField from 'uniforms-semantic/SubmitField';
+import HiddenField from 'uniforms-semantic/HiddenField';
+import ErrorsField from 'uniforms-semantic/ErrorsField';
+import { Bert } from 'meteor/themeteorchef:bert';
 import { Meteor } from 'meteor/meteor';
-import { Container, Header, Loader, Card } from 'semantic-ui-react';
-import { Profiles } from '/imports/api/profile/profile';
-import Profile from '/imports/ui/components/Profile';
-import { withTracker } from 'meteor/react-meteor-data';
-import PropTypes from 'prop-types';
 
-/** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-class Directory extends React.Component {
+/** Renders the Page for adding a document. */
+class Meeting extends React.Component {
 
-  /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
-  render() {
-    return (this.props.ready) ? this.renderPage() : <Loader>Getting data</Loader>;
+  /** Bind 'this' so that a ref to the Form can be saved in formRef and communicated between render() and submit(). */
+  constructor(props) {
+    super(props);
+    this.submit = this.submit.bind(this);
+    this.insertCallback = this.insertCallback.bind(this);
+    this.formRef = null;
   }
 
-  /** Render the page once subscriptions have been received. */
-  renderPage() {
+  /** Notify the user of the results of the submit. If successful, clear the form. */
+  insertCallback(error) {
+    if (error) {
+      Bert.alert({ type: 'danger', message: `Add failed: ${error.message}` });
+    } else {
+      Bert.alert({ type: 'success', message: 'Add succeeded' });
+      this.formRef.reset();
+    }
+  }
+
+  /** On submit, insert the data. */
+  submit(data) {
+    const { firstName, lastName, address, image, description } = data;
+    const owner = Meteor.user().username;
+    Contacts.insert({ firstName, lastName, address, image, owner, description }, this.insertCallback);
+  }
+
+  /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
+  render() {
     return (
-        <Container>
-          <Header as="h2" textAlign="center" inverted>Pals</Header>
-          <Card.Group itemsPerRow={2}>
-            {this.props.profiles.map((profile, index) => <Profile key={index} profile={profile}/>)}
-          </Card.Group>
-        </Container>
+        <Grid container centered>
+          <Grid.Column>
+            <Header as="h2" textAlign="center">Add Contact</Header>
+            <AutoForm ref={(ref) => { this.formRef = ref; }} schema={ContactSchema} onSubmit={this.submit}>
+              <Segment>
+                <TextField name='firstName'/>
+                <TextField name='lastName'/>
+                <TextField name='address'/>
+                <TextField name='image'/>
+                <LongTextField name='description'/>
+                <SubmitField value='Submit'/>
+                <ErrorsField/>
+                <HiddenField name='owner' value='fakeuser@foo.com'/>
+              </Segment>
+            </AutoForm>
+          </Grid.Column>
+        </Grid>
     );
   }
 }
 
-/** Require an array of Profile documents in the props. */
-Directory.propTypes = {
-  profiles: PropTypes.array.isRequired,
-  ready: PropTypes.bool.isRequired,
-};
-
-/** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
-export default withTracker(() => {
-  // Get access to Profile documents.
-  const subscription = Meteor.subscribe('Profiles');
-  return {
-    profiles: Profiles.find({active: true}).fetch(),
-    ready: subscription.ready(),
-  };
-})(Directory);
+export default Meeting;
