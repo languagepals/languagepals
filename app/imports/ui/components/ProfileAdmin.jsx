@@ -82,7 +82,7 @@ class ProfileAdmin extends React.Component {
           </Card.Content>
           <Card.Content extra>
             <Divider horizontal>Meeting Preferences</Divider>
-            <h3>{this.props.profile.meetingOptions}</h3>
+            <Header color='green'>{this.props.profile.meetingOptions}</Header>
           </Card.Content>
           <Card.Content extra>
             <Table celled columns={2}>

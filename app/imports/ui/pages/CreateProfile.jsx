@@ -39,7 +39,19 @@ class CreateProfile extends React.Component {
   submit(data) {
     const { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, days, meetingOptions, _id } = data;
     Profiles.update(
-        _id, { $set: { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, days, meetingOptions, active: true } },
+        _id, {
+          $set: {
+            firstName,
+            lastName,
+            bio,
+            picture,
+            fluentLanguages,
+            practiceLanguages,
+            days,
+            meetingOptions,
+            active: true
+          }
+        },
         (error) => (error ?
             Bert.alert({ type: 'danger', message: `Profile Activation failed: ${error.message}` }) :
             Bert.alert({ type: 'success', message: 'Profile Activation Succeeded' })),
@@ -54,33 +66,35 @@ class CreateProfile extends React.Component {
   /** Display the form. */
   renderPage() {
     return (
-      <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
-        <Grid.Column>
-          <Header as="h2" textAlign="center">
-            Register your account
-          </Header>
-          <AutoForm schema={ProfileSchema} onSubmit={this.submit} model={this.props.doc} placeholder={true}>
-            <Segment>
-              <Form.Group widths='equal'>
-                <TextField Label='First Name' name='firstName'/>
-                <TextField Label='Last Name' name='lastName'/>
-              </Form.Group>
-              <TextField name='picture'/>
-              <LongTextField Label='Bio' name='bio'/>
-              <Form.Group widths='equal'>
-                <SelectField Label='Fluent Languages' name='fluentLanguages'/>
-                <SelectField Label='Practice Languages' name='practiceLanguages'/>
-              </Form.Group>
-              <SelectField label='Days Available For Meetings' name='days'/>
-              <SelectField label='Meeting Preferences' name='meetingOptions'/>
-              <SubmitField value='Submit'/>
-              <ErrorsField/>
-              <HiddenField name='owner'/>
-              <HiddenField name='active'/>
-            </Segment>
-          </AutoForm>
-        </Grid.Column>
-      </Grid>
+        <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
+          <Grid.Column>
+            <Header as="h2" textAlign="center">
+              Register your account
+            </Header>
+            <AutoForm schema={ProfileSchema} onSubmit={this.submit} model={this.props.doc} placeholder={true}>
+              <Segment>
+                <Form.Group widths='equal'>
+                  <TextField Label='First Name' name='firstName'/>
+                  <TextField Label='Last Name' name='lastName'/>
+                </Form.Group>
+                <TextField name='picture'/>
+                <LongTextField Label='Bio' name='bio'/>
+                <Form.Group widths='equal'>
+                  <SelectField Label='Fluent Languages' name='fluentLanguages'/>
+                  <SelectField Label='Practice Languages' name='practiceLanguages'/>
+                </Form.Group>
+                <Form.Group>
+                  <SelectField label='Days Available For Meetings' name='days'/>
+                  <SelectField label='Meeting Preferences' name='meetingOptions'/>
+                </Form.Group>
+                <SubmitField value='Submit'/>
+                <ErrorsField/>
+                <HiddenField name='owner'/>
+                <HiddenField name='active'/>
+              </Segment>
+            </AutoForm>
+          </Grid.Column>
+        </Grid>
     );
   }
 }

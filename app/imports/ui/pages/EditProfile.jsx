@@ -26,7 +26,7 @@ class EditProfile extends React.Component {
   submit(data) {
     const { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, days, meetingOptions, _id } = data;
     Profiles.update(
-        _id, { $set: { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, days, meetingOptions}},
+        _id, { $set: { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, days, meetingOptions } },
         (error) => (error ?
             Bert.alert({ type: 'danger', message: `Update failed: ${error.message}` }) :
             Bert.alert({ type: 'success', message: 'Update succeeded' })),
@@ -56,8 +56,10 @@ class EditProfile extends React.Component {
                   <SelectField label='Fluent Languages' name='fluentLanguages'/>
                   <SelectField label='Practice Languages' name='practiceLanguages'/>
                 </Form.Group>
-                <SelectField label='Days Available For Meetings' name='days'/>
-                <SelectField label='Meeting Preferences' name='meetingOptions'/>
+                <Form.Group>
+                  <SelectField label='Days Available For Meetings' name='days'/>
+                  <SelectField label='Meeting Preferences' name='meetingOptions'/>
+                </Form.Group>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
                 <HiddenField name='owner'/>
