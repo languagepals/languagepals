@@ -2,6 +2,8 @@ import SimpleSchema from 'simpl-schema';
 import { Mongo } from 'meteor/mongo';
 import { Tracker } from 'meteor/tracker';
 import { languageList } from '../languageList.js';
+import { daysOfTheWeek } from '../daysOfTheWeek.js';
+import { meetingOptions } from '../meetingOptions.js';
 
 /** Create a Meteor collection. */
 const Profiles = new Mongo.Collection('Profiles');
@@ -30,6 +32,23 @@ const ProfileSchema = new SimpleSchema({
     type: String,
     allowedValues: languageList,
   },
+  days: {
+    type: Array,
+    optional: true,
+  },
+  'days.$': {
+    type: String,
+    allowedValues: daysOfTheWeek,
+  },
+  meetingOptions: {
+    type: Array,
+    optional: true,
+  },
+  'meetingOptions.$':{
+    type: String,
+    allowedValues: meetingOptions,
+  }
+
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */

@@ -24,9 +24,9 @@ class EditProfile extends React.Component {
 
   /** On successful submit, insert the data. */
   submit(data) {
-    const { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, _id } = data;
+    const { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, days, meetingOptions, _id } = data;
     Profiles.update(
-        _id, { $set: { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages } },
+        _id, { $set: { firstName, lastName, bio, picture, fluentLanguages, practiceLanguages, days, meetingOptions } },
         (error) => (error ?
             Bert.alert({ type: 'danger', message: `Update failed: ${error.message}` }) :
             Bert.alert({ type: 'success', message: 'Update succeeded' })),
@@ -47,14 +47,18 @@ class EditProfile extends React.Component {
             <AutoForm schema={ProfileSchema} onSubmit={this.submit} model={this.props.doc}>
               <Segment>
                 <Form.Group widths='equal'>
-                  <TextField name='firstName'/>
-                  <TextField name='lastName'/>
+                  <TextField label='First Name' name='firstName'/>
+                  <TextField label='Last Name' name='lastName'/>
                 </Form.Group>
                 <TextField name='picture'/>
                 <LongTextField name='bio'/>
                 <Form.Group widths='equal'>
-                  <SelectField name='fluentLanguages'/>
-                  <SelectField name='practiceLanguages'/>
+                  <SelectField label='Fluent Languages' name='fluentLanguages'/>
+                  <SelectField label='Practice Languages' name='practiceLanguages'/>
+                </Form.Group>
+                <Form.Group>
+                  <SelectField label='Days Available For Meetings' name='days'/>
+                  <SelectField label='Meeting Preferences' name='meetingOptions'/>
                 </Form.Group>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
