@@ -67,6 +67,9 @@ class EditProfile extends React.Component {
               </Segment>
             </AutoForm>
             <Divider/>
+            <Button positive as={Link} to={`/list/${this.props.doc._id}`}>
+              Return to pals
+            </Button>
             <Button as={Link} to={`/deactivateprofile/${this.props.doc._id}`}
                     icon labelPosition='left' negative compact>
               Deactivate Profile
