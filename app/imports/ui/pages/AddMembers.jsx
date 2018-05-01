@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Loader, Header, Segment, Form, Divider, Container, Button } from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Divider, Button } from 'semantic-ui-react';
 import { Meetings } from '/imports/api/meeting/meeting';
 import { Profiles } from '/imports/api/profile/profile';
 import AutoForm from 'uniforms-semantic/AutoForm';
