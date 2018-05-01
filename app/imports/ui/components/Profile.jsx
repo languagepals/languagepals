@@ -46,9 +46,9 @@ class Profile extends React.Component {
                     <Table.Body>
                       <Table.Row>
                         {_.intersection(this.props.profile.days, ['Mon.']).length === 1 ? (
-                                <Table.Cell><Header color={'green'}>Mon.</Header></Table.Cell>
+                                <Table.Cell textAlign='center'><Header color={'green'}>Mon.</Header></Table.Cell>
                             ) :
-                            (<Table.Cell><Header disabled>Mon.</Header></Table.Cell>)}
+                            (<Table.Cell ><Header disabled>Mon.</Header></Table.Cell>)}
                         {_.intersection(this.props.profile.days, ['Tues.']).length === 1 ? (
                                 <Table.Cell ><Header color={'green'}>Tues.</Header></Table.Cell>
                             ) :
@@ -81,8 +81,31 @@ class Profile extends React.Component {
             </Grid>
           </Card.Content>
           <Card.Content extra>
-            <Divider horizontal>Meeting Preferences</Divider>
-            <Header color='green'>{this.props.profile.meetingOptions}</Header>
+            <Grid columns='equal'>
+            <Grid.Row>
+              <Grid.Column>
+                <Divider horizontal>Meeting Preference</Divider>
+                <Table columns={3} celled singleLine>
+                  <Table.Body>
+                    <Table.Row>
+                      {_.intersection(this.props.profile.meetingOptions, ['In Person']).length === 1 ? (
+                              <Table.Cell textAlign='center'><Header color={'green'}>In Person</Header></Table.Cell>
+                          ) :
+                          (<Table.Cell textAlign='center'><Header disabled>In Person</Header></Table.Cell>)}
+                      {_.intersection(this.props.profile.meetingOptions, ['Video Chat']).length === 1 ? (
+                              <Table.Cell textAlign='center'><Header color={'green'}>Video Chat</Header></Table.Cell>
+                          ) :
+                          (<Table.Cell textAlign='center'><Header disabled>Video Chat</Header></Table.Cell>)}
+                      {_.intersection(this.props.profile.meetingOptions, ['Social Media']).length === 1 ? (
+                              <Table.Cell textAlign='center'><Header color={'green'}>Social Media</Header></Table.Cell>
+                          ) :
+                          (<Table.Cell textAlign='center'><Header disabled>Social Media</Header></Table.Cell>)}
+                    </Table.Row>
+                  </Table.Body>
+                </Table>
+              </Grid.Column>
+            </Grid.Row>
+            </Grid>
           </Card.Content>
         </Card>
     );
