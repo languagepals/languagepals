@@ -50,7 +50,7 @@ class AddMeeting extends React.Component {
                 <DateField name='createdAt'/>
                 <DateField name='meetingTime'/>
                 <TextField name='setting'/>
-                <SelectField Label='Languages' name='Languages'/>
+                <SelectField label='Languages' name='Languages'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
                 <HiddenField name='owner' value='fakeuser@foo.com'/>
