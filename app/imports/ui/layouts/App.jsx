@@ -16,7 +16,8 @@ import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
-import Meeting from '../pages/Meeting';
+import AddMeeting from '../pages/AddMeeting';
+import YourMeetings from '../pages/YourMeetings';
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
   render() {
@@ -34,7 +35,8 @@ class App extends React.Component {
               <ProtectedRoute path="/edit/:_id" component={EditProfile}/>
               <AdminProtectedRoute path="/admin" component={DirectoryAdmin}/>
               <ProtectedRoute path="/signout" component={Signout}/>
-              <ProtectedRoute path="/meeting" component={Meeting}/>
+              <ProtectedRoute path="/addmeeting" component={AddMeeting}/>
+              <ProtectedRoute path="/YourMeetings" component={YourMeetings}/>
               <Route component={NotFound}/>
             </Switch>
             <Footer/>

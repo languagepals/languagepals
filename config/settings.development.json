@@ -1,38 +1,85 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme" },
-    { "email": "hans@hawaii.edu", "password": "changeme" },
-    { "email": "foo@john.com", "password": "changeme" }
+    {
+      "email": "admin@foo.com",
+      "password": "changeme",
+      "role": "admin"
+    },
+    {
+      "email": "john@foo.com",
+      "password": "changeme"
+    },
+    {
+      "email": "hans@hawaii.edu",
+      "password": "changeme"
+    },
+    {
+      "email": "foo@john.com",
+      "password": "changeme"
+    }
   ],
-
   "defaultProfiles": [
-    { "firstName": "John",
+    {
+      "firstName": "John",
       "lastName": "Foo",
       "owner": "john@foo.com",
       "active": true,
       "bio": "Hello I speak many languages but not well English. I do love this website though!",
       "picture": "https://ia.media-imdb.com/images/M/MV5BNjQ3NjBkNDEtNzM3MC00YWQ1LWE0MWUtOTljMmIwNjhjNzFmXkEyXkFqcGdeQXVyODA4NTQ4NzI@._V1_UY317_CR51,0,214,317_AL_.jpg",
-      "fluentLanguages": ["English"],
-      "practiceLanguages": ["Japanese"]
+      "fluentLanguages": [
+        "English"
+      ],
+      "practiceLanguages": [
+        "Japanese"
+      ]
     },
-    { "firstName": "Foo",
+    {
+      "firstName": "Foo",
       "lastName": "John",
       "owner": "foo@john.com",
       "active": true,
       "bio": "Hello I am Foo John and I am the greatest English speaker... Probably ever. I need to learn some Korean though I have a very very important meeting coming up.",
       "picture": "https://www.thestar.com/content/dam/thestar/news/world/2017/11/24/time-magazine-says-trump-got-it-wrong-after-he-tweeted-he-took-a-pass-at-being-named-person-of-the-year/trump.jpg.size.custom.crop.899x650.jpg",
-      "fluentLanguages": ["English"],
-      "practiceLanguages": ["Korean"]
+      "fluentLanguages": [
+        "English"
+      ],
+      "practiceLanguages": [
+        "Korean"
+      ]
     },
-    { "firstName": "Hans",
+    {
+      "firstName": "Hans",
       "lastName": "Schippers",
       "owner": "hans@hawaii.edu",
       "active": true,
       "bio": "I love basketball and am going to be playing in the Spanish league next season! Get Buckets!",
       "picture": "https://bloximages.chicago2.vip.townnews.com/bgdailynews.com/content/tncms/assets/v3/editorial/1/b5/1b5d116e-6309-5f8f-adaf-ca8bb3cf61e1/5aa01bc139bca.image.jpg",
-      "fluentLanguages": ["English"],
-      "practiceLanguages": ["Spanish"]
+      "fluentLanguages": [
+        "English"
+      ],
+      "practiceLanguages": [
+        "Spanish"
+      ]
+    }
+  ],
+  "defaultMeetings": [
+    {
+      "owner": "john@foo.com",
+      "createdAt": "2018-04-30T10:30:06.000Z",
+      "meetingTime": "2018-05-01T10:30:06.000Z",
+      "setting": "Skype",
+      "minutes": "We will be practicing Korean and talking about Korean cuisine.",
+      "members": ["john@foo.com","foo@john.com"],
+      "Languages": ["Korean"]
+    },
+    {
+      "owner": "foo@john.com",
+      "createdAt": "2018-04-30T10:30:06.000Z",
+      "meetingTime": "2018-05-01T10:30:06.000Z",
+      "setting": "Starbucks",
+      "minutes": "We will be practicing Spanish and talking about Spanish cuisine.",
+      "members": ["foo@john.com", "hans@hawaii.edu"],
+      "Languages": ["Spanish"]
     }
   ]
 }
