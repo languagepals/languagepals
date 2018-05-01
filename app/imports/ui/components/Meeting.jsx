@@ -1,8 +1,9 @@
 import React from 'react';
-import { Card, Image, Header, Divider, Icon } from 'semantic-ui-react';
+import { Card, Image, Header, Divider, Icon, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import { _ } from 'meteor/underscore';
+
 
 /** Renders a single card in the List Contact table. See pages/ListContact.jsx. */
 class Meeting extends React.Component {
@@ -36,13 +37,18 @@ class Meeting extends React.Component {
                     </div>);
               })}
             </Card.Content>
+            <Card.Content>
+              <Button primary size='mini' fluid as={Link} to={`/addmembers/${this.props.meeting._id}`}>
+                Add Members
+              </Button>
+            </Card.Content>
             <Divider horizontal><Icon name="write square"/>Meeting Notes</Divider>
             <Card.Description>
               {this.props.meeting.minutes}
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Link to={`/edit/${this.props.meeting._id}`}>Edit</Link>
+            <Link to={`/editmeeting/${this.props.meeting._id}`}>Edit</Link>
           </Card.Content>
         </Card>);
   }
