@@ -55,7 +55,7 @@ class AddMembers extends React.Component {
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   renderPage() {
     const potential_new_members = this.props.profiles.filter(profile =>
-        _.intersection([profile.owner], this.props.doc.members).length === 0)
+        _.intersection([profile.owner], this.props.doc.members).length === 0);
     const profile_username_list =
         _.object(_.pluck(potential_new_members, 'owner'), _.pluck(potential_new_members, 'owner'));
     console.log(potential_new_members);
