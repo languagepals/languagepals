@@ -20,7 +20,7 @@ class YourMeetings extends React.Component {
   renderPage() {
     return (
         <Container>
-          <Header as="h2" textAlign="center" inverted>You Meetings</Header>
+          <Header as="h2" textAlign="center" inverted>Your Meetings</Header>
           <Card.Group itemsPerRow={2}>
             {this.props.meetings.map((meeting, index) =>
                 <Meeting key={index} meeting={meeting}
