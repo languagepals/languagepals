@@ -25,9 +25,9 @@ class EditMeeting extends React.Component {
 
   /** On successful submit, insert the data. */
   submit(data) {
-    const { meetingTime, setting, minutes, Languages,  _id } = data;
+    const { createdAt, meetingTime, setting, minutes, Languages, _id } = data;
     Meetings.update(
-        _id, { $set: { meetingTime, setting, minutes, Languages,  _id } },
+        _id, { $set: { createdAt, meetingTime, setting, minutes, Languages, _id } },
         (error) => (error ?
             Bert.alert({ type: 'danger', message: `Update failed: ${error.message}` }) :
             Bert.alert({ type: 'success', message: 'Update succeeded' })),
